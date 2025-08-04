@@ -1,0 +1,7 @@
+(*) como criar ambiente virtual -> python -m venv venv
+
+1) coloque no terminal dentro da pasta do projeto
+2) Crie a pata de projeto - django-admin startproject projeto
+3) Suba o servidor do django - python manage.py runserver
+
+3) ative o ambiente virtual - venv\Scripts\Activate
