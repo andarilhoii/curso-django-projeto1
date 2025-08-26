@@ -44,18 +44,15 @@
 }
 
 * {
-    /* este bloco está "zerando" (resset html) */
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
-/* o bloco html está definindo um percentual de font */
 html {
     font-size: 62.5%;
 }
 
-/* bloco body está convertendo os pixels em rem (1.6 = 16 pixels) */
 body {
     font-size: 1.6rem;
     font-family: var(--font-primary);
@@ -73,14 +70,12 @@ h6 {
 }
 
 .container {
-    /* ccs do container menor */
     padding: var(--spacing-gutter-medium);
-    max-width: 144rem;
+    max-width: 144rem; /* ⚠ largura muito grande para telas pequenas pode forçar overflow */
     margin: 0 auto;
 }
 
 .main-header-container {
-    /* ccs do container maior */
     background: var(--color-primary-dark);
 }
 
@@ -96,46 +91,29 @@ h6 {
     margin: 0 auto;
 }
 
-.main-logo-icon {
-    nav-right: 2rem;
-}
-
 .search-form {
     border: .2rem solid var(--color-primary-dark);
     max-width: 64rem;
     margin: 0 auto;
     border-radius: .4rem;
     position: relative;
-    /* definindo que se o campo search 
-    estiver recebendo o foco do usuário, a mudança de cor deve ocorrer de 
-    acordo com o tempo de transição para o formulário search */
     transition: all 300ms ease-in-out;
 }
 
 .search-input {
-    /* retirando bordas/backgroud e linhas do campo search */
     border: none;
     background: none;
     outline: none;
-    /* definindo o espaço para a borda em ambos */
     padding: 1rem 1rem;
     padding-right: 4rem;
     width: 100%;
-    /* definindo que se o campo search 
-    estiver recebendo o foco do usuário, a mudança de cor deve ocorrer de 
-    acordo com o tempo de transição */
     transition: all 300ms ease-in-out;
 }
 
 .search-button {
-    /* retirando bordas/backgroud e linhas do botão search */
     border: none;
     background: none;
     outline: none;
-    /* definindo o tamanho máximo do campo search */
-    /*width: 100%;*/
-    /* definindo o espaço que deve ser deixado a direita */
-    /* definindo a posição do botão como absoluta, no topo, e a direita */
     position: absolute;
     top: 0;
     right: 0;
@@ -152,31 +130,17 @@ h6 {
     background: rgba(0, 0, 0, .20);
 }
 
-/* definindo que se o campo search 
-estiver recebendo o foco do usuário, deve mudar a cor da borda */
-.search-form:focus-within {
-    border-color: var(--color-primary);
-    background: var(--color-white);
-}
-
-/* definindo que se o campo search 
-estiver recebendo o foco do usuário, deve mudar a cor também do botão */
-.search-form:focus-within .search-button {
-    color: var(--color-primary);
-}
-
 .main-content {
     padding-top: 0;
 }
 
-/* montagem do grid */
+/* ⚠ pode gerar overflow em telas menores devido ao min-width alto */
 .main-content-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
     gap: var(--spacing-gutter-large);
 }
 
-/* container */
 .recipe {
     background: var(--color-white);
     box-shadow: -5px 5px 10px rgba(0, 0, 0, .2);
@@ -186,25 +150,33 @@ estiver recebendo o foco do usuário, deve mudar a cor também do botão */
     overflow: hidden;
 }
 
-/* imagem do container */
 .recipe img {
-    width: 100%;             /* ocupa toda a largura do contêiner */
-    height: 250px;           /* altura fixa para padronizar */
-    object-fit: cover;       /* corta imagem para preencher espaço sem distorção */
-    display: block;          /* remove espaços brancos em imagens inline */
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
 }
 
-/* lista de itens container*/
 .recipe-list-item {
     max-width: 64rem;
     height: fit-content;
 }
 
-/* define um crescimento para item do grid num 1 */
+/* ⚠ scale(1.02) pode expandir além da largura do container em hover */
 .recipe-list-item:hover {
     transform: scale(1.02);
-    box-shadow: -8px 8px 18px rgba (0, 0, 0, .25);
+    box-shadow: -8px 8px 18px rgba(0, 0, 0, .25);
 }
+
+.recipe-title-container {
+    padding: var(--spacing-gutter-medium);
+    padding-bottom: 2rem;
+}
+
+.recipe-title-container a {
+    text-decoration: none;
+    color: var(--color-primary-dark);
+ }
 
 .recipe-title {
     padding: 0 var(--spacing-gutter-medium);
@@ -277,17 +249,20 @@ estiver recebendo o foco do usuário, deve mudar a cor também do botão */
     position: relative;
 }
 
-/*sobreposição das seção .recipe-list-item quendo filha de main-content-detail*/
+/* ⚠ Centralização com left:50% + translateX pode gerar deslocamento extra */
 .main-content-detail .recipe-list-item {
     position: relative;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 50%; /* ⚠ possível causa de overflow */
+    transform: translateX(-50%); /* ⚠ possível causa de overflow */
     max-width: 84rem;
 }
 
-/*sobreposição das seção .recipe-list-item:hover quendo filha de main-content-detail*/
 .main-content-detail .recipe-list-item:hover {
     transform: scale(1);
+}
+
+.preparation-steps {
+    padding: var(--spacing-gutter-medium);
 }
 
 .main-footer {
